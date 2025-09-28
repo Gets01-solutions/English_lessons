@@ -27,20 +27,84 @@ main section.active{display:block;}
 .question-block{margin-bottom:15px;padding:10px;background:#fff;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
 .question-block button{display:block;margin:5px 0;padding:8px;width:100%;border:none;border-radius:5px;cursor:pointer;background:#f1f1f1;}
 .question-block button:hover{background:#dff9fb;}
-#dict-search{width:100%;padding:10px;margin-bottom:15px;border-radius:5px;border:1px solid #ccc;}
-#dict-results .word-item{background:#fff;padding:10px;margin-bottom:5px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-#sentence-board {display:flex;flex-direction:column;gap:15px;}
-#sentence-board div {background: #fff;padding: 15px;border-radius: 8px;box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
-#sentence-board button {margin:5px;padding:10px 15px;border:none;border-radius:5px;cursor:pointer;background:#0096c7;color:white;transition: transform 0.2s, background 0.2s;}
-#sentence-board button:hover {background: #0077b6;transform: scale(1.05);}
-.correct {background: #38b000 !important;color: white;animation: pop 0.3s;}
-.wrong {background: #ff3c38 !important;color:white;animation: shake 0.3s;}
-@keyframes pop {0%{transform: scale(1);}50%{transform: scale(1.3);}100%{transform: scale(1);}}
-@keyframes shake {0%{transform:translateX(0);}25%{transform:translateX(-5px);}50%{transform:translateX(5px);}75%{transform:translateX(-5px);}100%{transform:translateX(0);}}
-#sentence-result {font-weight:bold;font-size:1.1em;}
+#dict-search{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+#dict-results .word-item{
+  background:#fff;
+  padding:10px;
+  margin-bottom:5px;
+  border-radius:8px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+#sentence-board {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#sentence-board div {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#sentence-board button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #0096c7;
+  color: white;
+  transition: transform 0.2s, background 0.2s;
+}
+
+#sentence-board button:hover {
+  background: #0077b6;
+  transform: scale(1.05);
+}
+
+.correct {
+  background: #38b000 !important;
+  color: white;
+  animation: pop 0.3s;
+}
+
+.wrong {
+  background: #ff3c38 !important;
+  color: white;
+  animation: shake 0.3s;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+#sentence-result {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
 </style>
 </head>
 <body>
+
 <header>
 <h1>English Learning App</h1>
 <nav>
@@ -54,42 +118,819 @@ main section.active{display:block;}
 <button onclick="showSection('dictionary')">Dictionary</button>
 <button onclick="showSection('matching')">Matching Game</button>
 <button onclick="showSection('sentence-game')">Complete Sentences</button>
+
 </nav>
 </header>
+
 <main>
-<section id="welcome" class="active"><div style="text-align:center; margin-top:50px;"><h2>Welcome to English Learning App!</h2><p>Click the buttons above to start learning.</p></div></section>
-<section id="numbers"><h2>Numbers</h2><div id="numbers-list" class="word-list"></div></section>
-<section id="family"><h2>Family Members</h2><div id="family-list"></div></section>
-<section id="colors"><h2>Colors</h2><div id="colors-list" class="word-list"></div></section>
-<section id="reading"><h2>Reading Passages</h2><div id="reading-passages"></div></section>
-<section id="grammar"><h2>Grammar Lessons & Conversations</h2><div id="grammar-lessons"></div><div id="conversations"></div></section>
-<section id="quiz"><h2>Quiz</h2><div id="quiz-container"></div><p id="result"></p><button id="next-btn" onclick="nextQuestion()">Next</button></section>
-<section id="dictionary"><h2>English-French Dictionary</h2><input type="text" id="dict-search" placeholder="Type an English word..." oninput="searchDictionary()"><div id="dict-results"></div></section>
-<section id="matching"><h2>Matching Game: English ↔ French</h2><p>Click an English word, then click the matching French word!</p><div id="game-board" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;"></div><p id="game-result" style="margin-top:20px;font-weight:bold;"></p><button onclick="startGame()">Restart Game</button></section>
-<section id="sentence-game"><h2>Complete the Sentence: Articles & Prepositions</h2><p>Click the correct word to complete each sentence!</p><div id="sentence-board"></div><p id="sentence-result" style="margin-top:15px;font-weight:bold;"></p><button onclick="startSentenceGame()">Restart Game</button></section>
+<section id="welcome" class="active">
+<div style="text-align:center; margin-top:50px;">
+<h2>Welcome to English Learning App!</h2>
+<p>Click the buttons above to start learning.</p>
+</div>
+</section>
+
+<section id="numbers">
+<h2>Numbers</h2>
+<div id="numbers-list" class="word-list"></div>
+</section>
+
+<section id="family">
+<h2>Family Members</h2>
+<div id="family-list"></div>
+</section>
+
+<section id="colors">
+<h2>Colors</h2>
+<div id="colors-list" class="word-list"></div>
+</section>
+
+<section id="reading">
+<h2>Reading Passages</h2>
+<div id="reading-passages"></div>
+</section>
+
+<section id="grammar">
+<h2>Grammar Lessons & Conversations</h2>
+<div id="grammar-lessons"></div>
+<div id="conversations"></div>
+</section>
+
+<section id="quiz">
+<h2>Quiz</h2>
+<div id="quiz-container"></div>
+<p id="result"></p>
+<button id="next-btn" onclick="nextQuestion()">Next</button>
+</section>
+<section id="dictionary">
+  <h2>English-French Dictionary</h2>
+  <input type="text" id="dict-search" placeholder="Type an English word..." oninput="searchDictionary()">
+  <div id="dict-results"></div>
+</section>
+<section id="matching">
+  <h2>Matching Game: English ↔ French</h2>
+  <p>Click an English word, then click the matching French word!</p>
+  <div id="game-board" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;"></div>
+  <p id="game-result" style="margin-top:20px;font-weight:bold;"></p>
+  <button onclick="startGame()">Restart Game</button>
+</section>
+<section id="sentence-game">
+  <h2>Complete the Sentence: Articles & Prepositions</h2>
+  <p>Click the correct word to complete each sentence!</p>
+  
+  <div id="sentence-board"></div>
+  <p id="sentence-result" style="margin-top:15px;font-weight:bold;"></p>
+  <button onclick="startSentenceGame()">Restart Game</button>
+</section>
+
 </main>
+
 <script>
 // Navigation
-function showSection(id){document.querySelectorAll("main section").forEach(sec=>sec.classList.remove("active"));document.getElementById(id).classList.add("active");}
+function showSection(id){
+  document.querySelectorAll("main section").forEach(sec=>sec.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
 // Numbers
-const englishNumbers=["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"];
-const frenchNumbers=["Un","Deux","Trois","Quatre","Cinq","Six","Sept","Huit","Neuf","Dix"];
-const numbersList=document.getElementById("numbers-list");englishNumbers.forEach((eng,i)=>{const div=document.createElement("div");div.className="word-item";div.innerHTML=`<span>${eng}</span><span>${frenchNumbers[i]}</span>`;numbersList.appendChild(div);});
+const englishNumbers=["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten",
+"Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen","Twenty",
+"Twenty-one","Twenty-two","Twenty-three","Twenty-four","Twenty-five","Twenty-six","Twenty-seven","Twenty-eight","Twenty-nine","Thirty",
+"Thirty-one","Thirty-two","Thirty-three","Thirty-four","Thirty-five","Thirty-six","Thirty-seven","Thirty-eight","Thirty-nine","Forty",
+"Forty-one","Forty-two","Forty-three","Forty-four","Forty-five","Forty-six","Forty-seven","Forty-eight","Forty-nine","Fifty"];
+const frenchNumbers=["Un","Deux","Trois","Quatre","Cinq","Six","Sept","Huit","Neuf","Dix",
+"Onze","Douze","Treize","Quatorze","Quinze","Seize","Dix-sept","Dix-huit","Dix-neuf","Vingt",
+"Vingt et un","Vingt-deux","Vingt-trois","Vingt-quatre","Vingt-cinq","Vingt-six","Vingt-sept","Vingt-huit","Vingt-neuf","Trente",
+"Trente et un","Trente-deux","Trente-trois","Trente-quatre","Trente-cinq","Trente-six","Trente-sept","Trente-huit","Trente-neuf","Quarante",
+"Quarante et un","Quarante-deux","Quarante-trois","Quarante-quatre","Quarante-cinq","Quarante-six","Quarante-sept","Quarante-huit","Quarante-neuf","Cinquante"];
+const numbersList=document.getElementById("numbers-list");
+englishNumbers.forEach((eng,i)=>{
+  let div=document.createElement("div");div.className="word-item";
+  div.innerText=`${i+1}: ${eng} - ${frenchNumbers[i]}`;
+  numbersList.appendChild(div);
+});
+
 // Family
-const familyWords=["Father","Mother","Brother","Sister"];
-const familyFrench=["Père","Mère","Frère","Sœur"];
-const familyList=document.getElementById("family-list");familyWords.forEach((eng,i)=>{const div=document.createElement("div");div.className="word-item";div.innerHTML=`<span>${eng}</span><span>${familyFrench[i]}</span>`;familyList.appendChild(div);});
+const familyMembers=[
+{eng:"Father",fr:"père (The father)"},
+{eng:"Mother",fr:"Mère (The mother)"},
+{eng:"Brother",fr:"Frère (The brother)"},
+{eng:"Sister",fr:"Sœur (The sister)"},
+{eng:"Grandfather",fr:"Grand-père (The grandfather)"},
+{eng:"Grandmother",fr:"Grand-mère (The grandmother)"},
+{eng:"Son",fr:"Fils (The son)"},
+{eng:"Daughter",fr:"Fille (The daughter)"},
+{eng:"Uncle",fr:"Oncle (The uncle)"},
+{eng:"Aunt",fr:"Tante (The aunt)"}
+];
+const familyList=document.getElementById("family-list");
+familyMembers.forEach(mem=>{
+  let btn=document.createElement("button");btn.className="collapsible";btn.innerText=mem.eng;
+  let div=document.createElement("div");div.className="content";div.innerText=mem.fr;
+  familyList.appendChild(btn);familyList.appendChild(div);
+  btn.addEventListener("click",()=>{div.style.display=(div.style.display==="block")?"none":"block";});
+});
+
 // Colors
-const colors=["Red","Blue","Green"];
-const colorFrench=["Rouge","Bleu","Vert"];
-const colorsList=document.getElementById("colors-list");colors.forEach((color,i)=>{const div=document.createElement("div");div.className="word-item";div.innerHTML=`<span>${color}</span><span class="color-box" style="background:${color.toLowerCase()}"></span><span>${colorFrench[i]}</span>`;colorsList.appendChild(div);});
-// Simple Quiz Example
-const quizQuestions=[{q:"What is the color of the sky?","options":["Blue","Green","Red"],answer:"Blue"}];
-let currentQ=0,score=0;
-function loadQuestion(){if(currentQ>=quizQuestions.length){document.getElementById("quiz-container").innerHTML=`Quiz completed! Score: ${score}/${quizQuestions.length}`;document.getElementById("next-btn").style.display="none";return;}const q=quizQuestions[currentQ];const container=document.getElementById("quiz-container");container.innerHTML=`<p>${q.q}</p>${q.options.map(opt=>`<button onclick="checkAnswer('${opt}')">${opt}</button>`).join("")}`;}
-function checkAnswer(selected){if(selected===quizQuestions[currentQ].answer){score++;document.getElementById("result").innerText="Correct!";document.getElementById("result").style.color="green";}else{document.getElementById("result").innerText=`Wrong! Correct: ${quizQuestions[currentQ].answer}`;document.getElementById("result").style.color="red";}document.getElementById("next-btn").style.display="inline-block";}
-function nextQuestion(){currentQ++;document.getElementById("next-btn").style.display="none";document.getElementById("result").innerText="";loadQuestion();}
-loadQuestion();
+const colors=[{name:"Red",french:"Rouge",hex:"#FF0000"},{name:"Green",french:"Vert",hex:"#00FF00"},{name:"Blue",french:"Bleu",hex:"#0000FF"},{name:"Yellow",french:"Jaune",hex:"#FFFF00"},{name:"Black",french:"Noir",hex:"#000000"},{name:"Orange", french:"Orange", hex:"#FFA500"},
+  {name:"Purple", french:"Violet", hex:"#800080"},
+  {name:"Pink", french:"Rose", hex:"#FFC0CB"},
+  {name:"Brown", french:"Marron", hex:"#A52A2A"},
+  {name:"Gray", french:"Gris", hex:"#808080"},
+  {name:"White", french:"Blanc", hex:"#FFFFFF"},
+  {name:"Cyan", french:"Cyan", hex:"#00FFFF"},
+  {name:"Magenta", french:"Magenta", hex:"#FF00FF"},
+  {name:"Maroon", french:"Bordeaux", hex:"#800000"},
+  {name:"Olive", french:"Olive", hex:"#808000"},
+  {name:"Navy", french:"Marine", hex:"#000080"},
+  {name:"Teal", french:"Sarcelle", hex:"#008080"},
+  {name:"Lime", french:"Citron vert", hex:"#00FF00"},
+  {name:"Indigo", french:"Indigo", hex:"#4B0082"},
+  {name:"Violet", french:"Violet", hex:"#EE82EE"}
+
+];
+const colorsList=document.getElementById("colors-list");
+colors.forEach(c=>{
+  let div=document.createElement("div");div.className="word-item";
+  div.innerHTML=`${c.name} - ${c.french} <div class="color-box" style="background:${c.hex}"></div>`;
+  colorsList.appendChild(div);
+});
+
+// Reading Passages
+const passages=[
+  {
+    passage:`The sun rises in the east every morning. The sky turns golden as the city wakes up. Birds start singing, and the streets become lively with people heading to work or school. Children play in the garden, while flowers bloom, creating a beautiful scene.`,
+    questions:[
+      {q:"Where does the sun rise?",a:"East"},
+      {q:"Who plays in the garden?",a:"Children"},
+      {q:"What happens to the streets in the morning?",a:"They become lively"}
+    ]
+  },
+  {
+    passage:`John has a dog named Max. Max loves to play fetch in the yard. Every morning, John takes Max for a walk in the park. They meet other dogs and owners there. Max is very friendly and always wags his tail when meeting new friends.`,
+    questions:[
+      {q:"What is the dog's name?",a:"Max"},
+      {q:"Where does John take Max every morning?",a:"Park"},
+      {q:"How does Max greet new friends?",a:"Wags his tail"}
+    ]
+  },
+  {
+    passage:`The school opens at 8 AM. Students arrive and prepare for classes. Teachers greet the students and start lessons. Everyone listens carefully and participates. During breaks, children play outside and enjoy snacks before returning to their studies.`,
+    questions:[
+      {q:"When does the school open?",a:"8 AM"},
+      {q:"What do teachers do when students arrive?",a:"Greet and start lessons"},
+      {q:"What do children do during breaks?",a:"Play outside and enjoy snacks"}
+    ]
+  }
+];
+
+const readingDiv=document.getElementById("reading-passages");
+passages.forEach((p,pi)=>{
+  let div=document.createElement("div");div.className="passage";
+  div.innerHTML=`<p><strong>Passage ${pi+1}:</strong> ${p.passage}</p>`;
+  p.questions.forEach((q,qi)=>{
+    let qdiv=document.createElement("div");qdiv.className="question-block";
+    qdiv.innerHTML=`<p>${qi+1}. ${q.q}</p>
+    <button onclick="checkReadingAnswer(this,'${q.a}','p${pi}q${qi}')">${q.a}</button>
+    <button onclick="checkReadingAnswer(this,'${q.a}','p${pi}q${qi}')">Other</button>
+    <p id="p${pi}q${qi}result"></p>`;
+    div.appendChild(qdiv);
+  });
+  readingDiv.appendChild(div);
+});
+
+// Grammar Lessons
+const grammarLessons=[
+  {title:"Simple Present",text:"I eat breakfast every day. – Je prends le petit-déjeuner tous les jours."},
+  {title:"Present Continuous",text:"I am reading a book. – Je suis en train de lire un livre."},
+  {title:"Simple Past",text:"I went to the market yesterday. – Je suis allé au marché hier."},
+  {
+    title:"Articles",
+    text:`Articles are words like 'a', 'an', and 'the' used before nouns.
+Examples:
+- I saw a cat. – J'ai vu un chat. (any cat, not specific)
+- I saw the cat. – J'ai vu le chat. (a specific cat we both know)
+- I want an apple. – Je veux une pomme. (apple starting with a vowel)
+Explanation: 'a' is used before consonant sounds, 'an' before vowel sounds, and 'the' is used when the noun is specific or already known.`
+  },
+  {title:"Prepositions",text:"The book is on the table. – Le livre est sur la table."},
+  {title:"Pronouns",text:"He is my brother. – Il est mon frère."},
+  {title:"Adjectives",text:"The big dog is running. – Le grand chien court."}
+];
+
+const grammarDiv=document.getElementById("grammar-lessons");
+grammarLessons.forEach(l=>{
+  let div=document.createElement("div");div.className="lesson";
+  div.innerHTML=`<h3>${l.title}</h3><p>${l.text}</p>`;
+  grammarDiv.appendChild(div);
+});
+
+// Mini Conversations
+const conversations=[
+{title:"Greetings",lines:["Hello! How are you?","I’m fine, thank you! And you?"]},
+{title:"Shopping",lines:["How much is this shirt?","It is $20."]},
+{title:"Directions",lines:["Excuse me, where is the bank?","It is next to the post office."]},
+{title:"Food",lines:["I would like a sandwich, please.","Sure! Anything to drink?"]},
+{title:"Daily Routine",lines:["I wake up at 7 AM and go jogging.","I usually wake up at 6 AM and read the newspaper."]}
+];
+const convoDiv=document.getElementById("conversations");
+conversations.forEach(c=>{
+  let div=document.createElement("div");div.className="lesson";
+  div.innerHTML=`<h3>Mini Conversation - ${c.title}</h3>`;
+  c.lines.forEach(line=>{
+    let p=document.createElement("p");p.innerText=line;div.appendChild(p);
+  });
+  let btn=document.createElement("button");btn.innerText="Listen 🔊";btn.onclick=()=>playConversation(c.lines);
+  div.appendChild(btn);
+  convoDiv.appendChild(div);
+});
+
+// Quiz
+const quizQuestions=[
+{question:"What is 1 in English?",options:["One","Two","Three"],answer:"One"},
+{question:"What is 50 in English?",options:["Fifty","Forty","Sixty"],answer:"Fifty"},
+  // Numbers
+  {question:"What is 15 in English?",options:["Fifteen","Fiveteen","Fiftteen"],answer:"Fifteen"},
+  {question:"What is 23 in English?",options:["Twenty-three","Twenty-thre","Twentyfree"],answer:"Twenty-three"},
+  {question:"What is 40 in English?",options:["Fourty","Forty","Fourtee"],answer:"Forty"},
+
+  // Colors
+  {question:"Translate 'Rouge' to English",options:["Red","Blue","Green"],answer:"Red"},
+  {question:"Translate 'Vert' to English",options:["Green","Yellow","Black"],answer:"Green"},
+  {question:"Translate 'Bleu' to English",options:["Blue","Red","Yellow"],answer:"Blue"},
+  {question:"Translate 'Jaune' to English",options:["Yellow","White","Black"],answer:"Yellow"},
+
+  // Family
+  {question:"Translate 'Père' to English",options:["Father","Brother","Son"],answer:"Father"},
+  {question:"Translate 'Mère' to English",options:["Mother","Sister","Aunt"],answer:"Mother"},
+  {question:"Translate 'Frère' to English",options:["Brother","Father","Son"],answer:"Brother"},
+  {question:"Translate 'Sœur' to English",options:["Sister","Daughter","Mother"],answer:"Sister"},
+  {question:"Translate 'Grand-père' to English",options:["Grandfather","Uncle","Father"],answer:"Grandfather"},
+  {question:"Translate 'Grand-mère' to English",options:["Grandmother","Mother","Aunt"],answer:"Grandmother"},
+
+  // Articles / Grammar
+  {question:"Choose the correct article: ___ apple a day keeps the doctor away.",options:["An","A","The"],answer:"An"},
+  {question:"Choose the correct article: I saw ___ dog in the park.",options:["a","an","the"],answer:"a"},
+  {question:"Choose the correct article: ___ sun rises in the east.",options:["The","A","An"],answer:"The"},
+  {question:"Choose the correct article: She bought ___ umbrella.",options:["an","a","the"],answer:"an"},
+
+  // Reading comprehension
+  {question:"In the passage about John and Max, what is Max's favorite activity?",options:["Playing fetch","Sleeping","Eating"],answer:"Playing fetch"},
+  {question:"Where do John and Max meet other dogs?",options:["In the park","At home","At school"],answer:"In the park"},
+  {question:"How does Max greet new friends?",options:["Wags his tail","Barks","Runs away"],answer:"Wags his tail"},
+  {question:"Where do children play during breaks at school?",options:["Outside","Inside classroom","At home"],answer:"Outside"},
+  {question:"When does school open?",options:["8 AM","9 AM","7 AM"],answer:"8 AM"},
+
+  // Daily conversation / Greetings
+  {question:"How do you say 'Bonjour' in English?",options:["Hello","Goodbye","Please"],answer:"Hello"},
+  {question:"How do you say 'Merci' in English?",options:["Thanks","Hello","Goodbye"],answer:"Thanks"},
+  {question:"How do you ask the price of an item?",options:["How much is this?","Where is this?","What is this?"],answer:"How much is this?"},
+  {question:"How do you ask directions to the bank?",options:["Where is the bank?","What time is it?","How are you?"],answer:"Where is the bank?"},
+
+  // Food / Daily Routine
+  {question:"How do you order a sandwich politely?",options:["I would like a sandwich, please","Give me a sandwich","Sandwich now"],answer:"I would like a sandwich, please"},
+  {question:"What time does the person usually wake up in the daily routine?",options:["6 AM","7 AM","8 AM"],answer:"6 AM"},
+  {question:"What does the person do after waking up?",options:["Read the newspaper","Go to school","Eat breakfast"],answer:"Read the newspaper"}
+
+// add more as needed
+];
+
+let currentQuiz=0, score=0;
+const quizContainer=document.getElementById("quiz-container");
+
+function loadQuiz() {
+    quizContainer.innerHTML = "";
+    if (currentQuiz >= quizQuestions.length) {
+        quizContainer.innerHTML = `<h3>Quiz Completed!</h3><p>Your score: ${score}/${quizQuestions.length}</p>`;
+        document.getElementById("next-btn").style.display = "none";
+        return;
+    }
+
+    const q = quizQuestions[currentQuiz];
+
+    // Shuffle options
+    const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+
+    const qDiv = document.createElement("div");
+    qDiv.innerHTML = `<p>${q.question}</p>`;
+    shuffledOptions.forEach(opt => {
+        let btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.className = "option";
+        btn.onclick = () => checkQuizAnswer(opt);
+        qDiv.appendChild(btn);
+    });
+
+    quizContainer.appendChild(qDiv);
+    document.getElementById("next-btn").style.display = "none";
+}
+
+
+function checkQuizAnswer(selected){
+  const q = quizQuestions[currentQuiz];
+  const result = document.getElementById("result");
+  if(selected === q.answer){
+    score++;
+    result.innerText="✅ Correct!";
+    result.style.color="green";
+  } else {
+    result.innerText=`❌ Wrong! Correct: ${q.answer}`;
+    result.style.color="red";
+  }
+  document.getElementById("next-btn").style.display="block";
+}
+
+function nextQuestion(){
+  currentQuiz++;
+  loadQuiz();
+  document.getElementById("result").innerText="";
+}
+
+// Load initial quiz
+loadQuiz();
+// Function to speak an array of lines sequentially
+function playConversation(lines){
+  let index = 0;
+  
+  function speakLine() {
+    if(index >= lines.length) return; // finished
+    let utter = new SpeechSynthesisUtterance(lines[index]);
+    utter.lang = "en-US"; 
+    utter.onend = () => { // after finishing this line, go to next
+      index++;
+      speakLine();
+    };
+    window.speechSynthesis.speak(utter);
+  }
+  
+  speakLine(); // start speaking
+}
+
+// Function to speak a single word (for dictionary or any single text)
+function speakWord(word){
+  let utter = new SpeechSynthesisUtterance(word);
+  utter.lang = "en-US";
+  window.speechSynthesis.speak(utter);
+}
+const dictionary = [
+  // Fruits
+  {eng:"Apple", fr:"Pomme"},
+  {eng:"Banana", fr:"Banane"},
+  {eng:"Orange", fr:"Orange"},
+  {eng:"Strawberry", fr:"Fraise"},
+  {eng:"Lemon", fr:"Citron"},
+  {eng:"Grapes", fr:"Raisin"},
+  {eng:"Watermelon", fr:"Pastèque"},
+
+  // Animals
+  {eng:"Dog", fr:"Chien"},
+  {eng:"Cat", fr:"Chat"},
+  {eng:"Bird", fr:"Oiseau"},
+  {eng:"Fish", fr:"Poisson"},
+  {eng:"Horse", fr:"Cheval"},
+  {eng:"Cow", fr:"Vache"},
+  {eng:"Chicken", fr:"Poulet"},
+
+  // Family
+  {eng:"Father", fr:"Père"},
+  {eng:"Mother", fr:"Mère"},
+  {eng:"Brother", fr:"Frère"},
+  {eng:"Sister", fr:"Sœur"},
+  {eng:"Grandfather", fr:"Grand-père"},
+  {eng:"Grandmother", fr:"Grand-mère"},
+  {eng:"Son", fr:"Fils"},
+  {eng:"Daughter", fr:"Fille"},
+  {eng:"Uncle", fr:"Oncle"},
+  {eng:"Aunt", fr:"Tante"},
+
+  // Household
+  {eng:"House", fr:"Maison"},
+  {eng:"Room", fr:"Chambre"},
+  {eng:"Table", fr:"Table"},
+  {eng:"Chair", fr:"Chaise"},
+  {eng:"Door", fr:"Porte"},
+  {eng:"Window", fr:"Fenêtre"},
+  {eng:"Bed", fr:"Lit"},
+
+  // School / Work
+  {eng:"Book", fr:"Livre"},
+  {eng:"Pen", fr:"Stylo"},
+  {eng:"Notebook", fr:"Cahier"},
+  {eng:"School", fr:"École"},
+  {eng:"Teacher", fr:"Professeur"},
+  {eng:"Student", fr:"Élève"},
+  {eng:"Office", fr:"Bureau"},
+
+  // Food / Drink
+  {eng:"Bread", fr:"Pain"},
+  {eng:"Milk", fr:"Lait"},
+  {eng:"Water", fr:"Eau"},
+  {eng:"Juice", fr:"Jus"},
+  {eng:"Rice", fr:"Riz"},
+  {eng:"Chicken", fr:"Poulet"},
+  {eng:"Fish", fr:"Poisson"},
+
+  // Colors
+  {eng:"Red", fr:"Rouge"},
+  {eng:"Blue", fr:"Bleu"},
+  {eng:"Green", fr:"Vert"},
+  {eng:"Yellow", fr:"Jaune"},
+  {eng:"Black", fr:"Noir"},
+  {eng:"White", fr:"Blanc"},
+  {eng:"Orange", fr:"Orange"},
+  {eng:"Pink", fr:"Rose"},
+  {eng:"Purple", fr:"Violet"},
+  {eng:"Brown", fr:"Marron"},
+  {eng:"Gray", fr:"Gris"},
+
+  // Common verbs
+  {eng:"Eat", fr:"Manger"},
+  {eng:"Drink", fr:"Boire"},
+  {eng:"Go", fr:"Aller"},
+  {eng:"Come", fr:"Venir"},
+  {eng:"See", fr:"Voir"},
+  {eng:"Read", fr:"Lire"},
+  {eng:"Write", fr:"Écrire"},
+  {eng:"Sleep", fr:"Dormir"},
+  {eng:"Play", fr:"Jouer"},
+
+  // Common adjectives
+  {eng:"Big", fr:"Grand"},
+  {eng:"Small", fr:"Petit"},
+  {eng:"Beautiful", fr:"Beau / Belle"},
+  {eng:"Good", fr:"Bon"},
+  {eng:"Bad", fr:"Mauvais"},
+  {eng:"Hot", fr:"Chaud"},
+  {eng:"Cold", fr:"Froid"},
+  {eng:"Happy", fr:"Heureux / Heureuse"},
+  {eng:"Sad", fr:"Triste"},
+  {eng:"Adventure", fr:"Aventure"},
+{eng:"Breeze", fr:"Brise"},
+{eng:"Courage", fr:"Courage"},
+{eng:"Delicious", fr:"Délicieux / Délicieuse"},
+{eng:"Excited", fr:"Excité / Excitée"},
+{eng:"Freedom", fr:"Liberté"},
+{eng:"Generous", fr:"Généreux / Généreuse"},
+{eng:"Harmony", fr:"Harmonie"},
+{eng:"Idea", fr:"Idée"},
+{eng:"Journey", fr:"Voyage"},
+{eng:"Knowledge", fr:"Connaissance"},
+{eng:"Laughter", fr:"Rire"},
+{eng:"Magic", fr:"Magie"},
+{eng:"Nature", fr:"Nature"},
+{eng:"Ocean", fr:"Océan"},
+{eng:"Peace", fr:"Paix"},
+{eng:"Quiet", fr:"Calme / Silencieux"},
+{eng:"Respect", fr:"Respect"},
+{eng:"Sunshine", fr:"Soleil / Lumière du soleil"},
+{eng:"Treasure", fr:"Trésor"},
+{eng:"Unity", fr:"Unité"},
+{eng:"Victory", fr:"Victoire"},
+{eng:"Wisdom", fr:"Sagesse"},
+{eng:"Youth", fr:"Jeunesse"},
+{eng:"Zeal", fr:"Zèle"},
+{eng:"Bicycle", fr:"Vélo"},
+{eng:"Camera", fr:"Appareil photo"},
+{eng:"Dragon", fr:"Dragon"},
+{eng:"Envelope", fr:"Enveloppe"},
+{eng:"Forest", fr:"Forêt"},
+{eng:"Guitar", fr:"Guitare"},
+{eng:"Helmet", fr:"Casque"},
+{eng:"Island", fr:"Île"},
+{eng:"Jacket", fr:"Veste"},
+{eng:"Kangaroo", fr:"Kangourou"},
+{eng:"Lantern", fr:"Lanterne"},
+{eng:"Mountain", fr:"Montagne"},
+{eng:"Notebook", fr:"Cahier"},
+{eng:"Orchestra", fr:"Orchestre"},
+{eng:"Pencil", fr:"Crayon"},
+{eng:"Quilt", fr:"Couette"},
+{eng:"Rainbow", fr:"Arc-en-ciel"},
+{eng:"Ship", fr:"Bateau"},
+{eng:"Temple", fr:"Temple"},
+{eng:"Umbrella", fr:"Parapluie"},
+{eng:"Volcano", fr:"Volcan"},
+{eng:"Whistle", fr:"Sifflet"},
+{eng:"Xylophone", fr:"Xylophone"},
+{eng:"Yacht", fr:"Yacht"},
+{eng:"Zoo", fr:"Zoo"},
+{eng:"Acorn", fr:"Gland"},
+{eng:"Balloon", fr:"Ballon"},
+{eng:"Castle", fr:"Château"},
+{eng:"Dolphin", fr:"Dauphin"},
+{eng:"Echo", fr:"Écho"},
+{eng:"Feather", fr:"Plume"},
+{eng:"Glacier", fr:"Glacier"},
+{eng:"Horizon", fr:"Horizon"},
+{eng:"Ink", fr:"Encre"},
+{eng:"Jungle", fr:"Jungle"},
+{eng:"Kiwi", fr:"Kiwi"},
+{eng:"Lighthouse", fr:"Phare"},
+{eng:"Meadow", fr:"Prairie"},
+{eng:"Nest", fr:"Nid"},
+{eng:"Oasis", fr:"Oasis"},
+{eng:"Pebble", fr:"Galet"},
+{eng:"Quiver", fr:"Carquois"},
+{eng:"River", fr:"Rivière"},
+{eng:"Sand", fr:"Sable"},
+{eng:"Tower", fr:"Tour"},
+{eng:"Universe", fr:"Univers"},
+{eng:"Valley", fr:"Vallée"},
+{eng:"Wave", fr:"Vague"},
+{eng:"Xerox", fr:"Photocopie"},
+{eng:"Yogurt", fr:"Yaourt"},
+{eng:"Zeppelin", fr:"Zeppelin"},
+{eng:"Anchor", fr:"Ancre"},
+{eng:"Brush", fr:"Pinceau"},
+{eng:"Compass", fr:"Boussole"},
+{eng:"Drum", fr:"Tambour"},
+{eng:"Envelope", fr:"Enveloppe"},
+{eng:"Flute", fr:"Flûte"},
+{eng:"Grapevine", fr:"Vigne"},
+{eng:"Helmet", fr:"Casque"},
+{eng:"Igloo", fr:"Igloo"},
+{eng:"Jewel", fr:"Bijou"},
+{eng:"Kettle", fr:"Bouilloire"},
+{eng:"Lantern", fr:"Lanterne"},
+{eng:"Mirror", fr:"Miroir"},
+{eng:"Notebook", fr:"Cahier"},
+{eng:"Owl", fr:"Hibou"},
+{eng:"Parrot", fr:"Perroquet"},
+{eng:"Quilt", fr:"Couette"},
+{eng:"Rocket", fr:"Fusée"},
+{eng:"Star", fr:"Étoile"},
+{eng:"Telescope", fr:"Télescope"},
+{eng:"Umbrella", fr:"Parapluie"},
+{eng:"Violin", fr:"Violoncelle"},
+{eng:"Whale", fr:"Baleine"},
+{eng:"Xylophone", fr:"Xylophone"},
+{eng:"Yarn", fr:"Fil"},
+{eng:"Zigzag", fr:"Zigzag"}
+
+
+  
+];
+
+function searchDictionary(){
+  const input = document.getElementById("dict-search").value.toLowerCase();
+  const resultsDiv = document.getElementById("dict-results");
+  resultsDiv.innerHTML = "";
+
+  if(input.length === 0) return;
+
+  const results = dictionary.filter(item => item.eng.toLowerCase().startsWith(input));
+
+  if(results.length === 0){
+    resultsDiv.innerHTML = "<p>No matches found</p>";
+    return;
+  }
+
+  results.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "word-item";
+    div.innerHTML = `<strong>${item.eng}</strong> - ${item.fr}`;
+    resultsDiv.appendChild(div);
+  });
+}
+// Matching Game
+const matchingWords = [
+  {eng:"Apple", fr:"Pomme"},
+  {eng:"Dog", fr:"Chien"},
+  {eng:"House", fr:"Maison"},
+  {eng:"Sun", fr:"Soleil"},
+  {eng:"Book", fr:"Livre"},
+  {eng:"Water", fr:"Eau"},
+  {eng:"Car", fr:"Voiture"},
+  {eng:"Tree", fr:"Arbre"}
+];
+
+let selectedEng = null;
+let selectedFr = null;
+
+function startGame() {
+    const gameBoard = document.getElementById("game-board");
+    gameBoard.innerHTML = "";
+    document.getElementById("game-result").innerText = "";
+    
+    // Shuffle English and French arrays
+    const englishWords = matchingWords.map(w => w.eng).sort(() => Math.random() - 0.5);
+    const frenchWords = matchingWords.map(w => w.fr).sort(() => Math.random() - 0.5);
+
+    // Create buttons
+    englishWords.forEach(word => {
+        let btn = document.createElement("button");
+        btn.innerText = word;
+        btn.style.padding = "10px";
+        btn.style.margin = "5px";
+        btn.style.flex = "1 1 100px";
+        btn.onclick = () => selectWord(word, "eng", btn);
+        gameBoard.appendChild(btn);
+    });
+
+    frenchWords.forEach(word => {
+        let btn = document.createElement("button");
+        btn.innerText = word;
+        btn.style.padding = "10px";
+        btn.style.margin = "5px";
+        btn.style.flex = "1 1 100px";
+        btn.onclick = () => selectWord(word, "fr", btn);
+        gameBoard.appendChild(btn);
+    });
+}
+
+function selectWord(word, type, btn) {
+    if (type === "eng") selectedEng = {word, btn};
+    if (type === "fr") selectedFr = {word, btn};
+
+    if (selectedEng && selectedFr) {
+        const match = matchingWords.find(w => w.eng === selectedEng.word && w.fr === selectedFr.word);
+        const result = document.getElementById("game-result");
+        if (match) {
+            result.innerText = "✅ Correct Match!";
+            result.style.color = "green";
+            // Disable matched buttons
+            selectedEng.btn.disabled = true;
+            selectedFr.btn.disabled = true;
+            selectedEng.btn.style.opacity = 0.6;
+            selectedFr.btn.style.opacity = 0.6;
+        } else {
+            result.innerText = "❌ Wrong Match!";
+            result.style.color = "red";
+        }
+        // Reset selections
+        selectedEng = null;
+        selectedFr = null;
+    }
+}
+
+// Start the game on page load for the first time
+document.addEventListener("DOMContentLoaded", () => {
+    startGame();
+});
+// Sentence Completion Game
+const sentences = [
+  {text:"I have ___ apple.", options:["a","an","the"], answer:"an"},
+  {text:"The cat is ___ the table.", options:["on","in","under"], answer:"on"},
+  {text:"She went ___ school at 8 AM.", options:["to","at","in"], answer:"to"},
+  {text:"He is reading ___ book.", options:["a","an","the"], answer:"a"},
+  {text:"We live ___ a small house.", options:["in","on","at"], answer:"in"},
+  {text:"The keys are ___ the drawer.", options:["in","on","under"], answer:"in"},
+  {text:"I am going ___ the park.", options:["to","at","in"], answer:"to"},
+  {text:"Put the vase ___ the table.", options:["on","in","under"], answer:"on"},
+  {text:"She is sitting ___ the chair.", options:["on","in","at"], answer:"on"},
+  {text:"He bought ___ orange.", options:["an","a","the"], answer:"an"},
+  {text:"I have ___ apple.", options:["a","an","the"], answer:"an"},
+  {text:"The cat is ___ the table.", options:["on","in","under"], answer:"on"},
+  {text:"She went ___ school at 8 AM.", options:["to","at","in"], answer:"to"},
+  {text:"He is reading ___ book.", options:["a","an","the"], answer:"a"},
+  {text:"We live ___ a small house.", options:["in","on","at"], answer:"in"},
+  {text:"The keys are ___ the drawer.", options:["in","on","under"], answer:"in"},
+  {text:"I am going ___ the park.", options:["to","at","in"], answer:"to"},
+  {text:"Put the vase ___ the table.", options:["on","in","under"], answer:"on"},
+  {text:"She is sitting ___ the chair.", options:["on","in","at"], answer:"on"},
+  {text:"He bought ___ orange.", options:["an","a","the"], answer:"an"},
+  {text:"The dog is hiding ___ the bed.", options:["under","on","in"], answer:"under"},
+  {text:"I left my bag ___ the car.", options:["in","on","at"], answer:"in"},
+  {text:"We will meet ___ 5 PM.", options:["at","in","on"], answer:"at"},
+  {text:"There is ___ sun in the sky.", options:["a","an","the"], answer:"the"},
+  {text:"She put sugar ___ her tea.", options:["in","on","at"], answer:"in"},
+  {text:"He is standing ___ the door.", options:["at","in","on"], answer:"at"},
+  {text:"We stayed ___ a hotel in Paris.", options:["in","at","on"], answer:"in"},
+  {text:"I saw ___ elephant at the zoo.", options:["an","a","the"], answer:"an"},
+  {text:"Place the book ___ the shelf.", options:["on","in","under"], answer:"on"},
+  {text:"She goes to school ___ bus.", options:["by","in","on"], answer:"by"},
+  {text:"I put the milk ___ the fridge.", options:["in","on","at"], answer:"in"},
+  {text:"The cat jumped ___ the wall.", options:["over","in","on"], answer:"over"},
+  {text:"He is sitting ___ the sofa.", options:["on","in","at"], answer:"on"},
+  {text:"We went ___ a walk in the evening.", options:["for","to","on"], answer:"for"},
+  {text:"I saw ___ owl in the tree.", options:["an","a","the"], answer:"an"},
+  {text:"The book is ___ the table.", options:["on","in","under"], answer:"on"},
+  {text:"She arrived ___ the airport early.", options:["at","in","on"], answer:"at"},
+  {text:"I am looking ___ my keys.", options:["for","at","on"], answer:"for"},
+  {text:"He lives ___ a big house.", options:["in","on","at"], answer:"in"},
+  {text:"There is ___ rainbow in the sky.", options:["a","an","the"], answer:"a"},
+  {text:"The children are playing ___ the park.", options:["in","on","at"], answer:"in"},
+  {text:"She is waiting ___ the bus stop.", options:["at","in","on"], answer:"at"},
+  {text:"I need ___ pencil to write.", options:["a","an","the"], answer:"a"},
+  {text:"The painting is hanging ___ the wall.", options:["on","in","at"], answer:"on"},
+  {text:"He put the letter ___ the mailbox.", options:["in","on","at"], answer:"in"},
+  {text:"We went ___ a picnic last Sunday.", options:["on","to","for"], answer:"on"},
+  {text:"The cat is hiding ___ the sofa.", options:["under","on","in"], answer:"under"},
+  {text:"I will meet you ___ the library.", options:["at","in","on"], answer:"at"},
+  {text:"She is sitting ___ the floor.", options:["on","in","at"], answer:"on"},
+  {text:"He goes to school ___ foot every day.", options:["on","by","in"], answer:"on"},
+  {text:"I saw ___ eagle flying in the sky.", options:["an","a","the"], answer:"an"},
+  {text:"The lamp is ___ the table.", options:["on","in","under"], answer:"on"},
+  {text:"He arrived ___ the station on time.", options:["at","in","on"], answer:"at"},
+  {text:"She is looking ___ her phone.", options:["for","at","on"], answer:"at"},
+  {text:"The kids are sitting ___ the bench.", options:["on","in","at"], answer:"on"},
+  {text:"I need ___ eraser.", options:["an","a","the"], answer:"an"},
+  {text:"We stayed ___ a cabin in the mountains.", options:["in","on","at"], answer:"in"},
+  {text:"He jumped ___ the river to save the dog.", options:["into","on","in"], answer:"into"},
+  {text:"The cup is ___ the kitchen counter.", options:["on","in","under"], answer:"on"},
+  {text:"She travels ___ train to work.", options:["by","on","in"], answer:"by"},
+  {text:"I saw ___ owl sitting on the tree.", options:["an","a","the"], answer:"an"},
+  {text:"I put ___ book ___ the shelf.", options:["a/on","the/in","the/on"], answer:"the/on"},
+  {text:"She went ___ market ___ morning.", options:["to/in","to/on","at/in"], answer:"to/in"},
+  {text:"There is ___ cat hiding ___ the sofa.", options:["a/under","the/in","a/in"], answer:"a/under"},
+  {text:"He is sitting ___ chair ___ the table.", options:["a/at","the/in","on/at"], answer:"a/at"},
+  {text:"We stayed ___ hotel ___ Paris.", options:["a/in","the/on","an/at"], answer:"a/in"},
+  {text:"The dog jumped ___ river ___ catch the ball.", options:["into/to","in/at","on/to"], answer:"into/to"},
+  {text:"She is waiting ___ bus stop ___ 8 AM.", options:["at/at","in/on","on/in"], answer:"at/at"},
+  {text:"I bought ___ orange ___ the market.", options:["an/from","a/on","the/in"], answer:"an/from"},
+  {text:"He walked ___ park ___ evening.", options:["in/in","on/at","at/in"], answer:"in/in"},
+  {text:"The keys are ___ drawer ___ the kitchen.", options:["in/in","on/at","under/in"], answer:"in/in"},
+  {text:"I saw ___ owl ___ the tree last night.", options:["an/in","a/on","the/in"], answer:"an/in"},
+  {text:"She placed ___ flowers ___ the vase.", options:["the/in","a/on","an/in"], answer:"the/in"},
+  {text:"We went ___ a long walk ___ the mountains.", options:["for/in","on/in","to/at"], answer:"for/in"},
+  {text:"He is reading ___ book ___ the table.", options:["a/on","the/on","an/in"], answer:"the/on"},
+  {text:"I left ___ umbrella ___ the car.", options:["my/in","an/on","the/at"], answer:"my/in"},
+  {text:"The cat is hiding ___ bed ___ the bedroom.", options:["under/in","on/at","in/on"], answer:"under/in"},
+  {text:"She is traveling ___ train ___ London.", options:["by/to","on/in","in/to"], answer:"by/to"},
+  {text:"I need ___ pencil ___ my bag.", options:["a/in","the/in","an/on"], answer:"a/in"},
+  {text:"He jumped ___ the pool ___ save the dog.", options:["into/to","in/on","on/at"], answer:"into/to"},
+  {text:"The children are playing ___ garden ___ the house.", options:["in/of","on/in","at/in"], answer:"in/of"}
+
+
+];
+
+let currentSentence = 0;
+let sentenceScore = 0;
+
+function startSentenceGame() {
+    const board = document.getElementById("sentence-board");
+    board.innerHTML = "";
+    document.getElementById("sentence-result").innerText = "";
+    currentSentence = 0;
+    sentenceScore = 0;
+    loadSentence();
+}
+
+function loadSentence() {
+    const board = document.getElementById("sentence-board");
+    board.innerHTML = "";
+
+    if(currentSentence >= sentences.length){
+        board.innerHTML = `<h3>Game Completed!</h3><p>Your score: ${sentenceScore}/${sentences.length}</p>`;
+        return;
+    }
+
+    const s = sentences[currentSentence];
+
+    const sentenceDiv = document.createElement("div");
+    sentenceDiv.innerHTML = `<p>${s.text.replace("___","<strong>___</strong>")}</p>`;
+
+    // Shuffle options
+    const shuffledOptions = [...s.options].sort(()=> Math.random()-0.5);
+    
+    shuffledOptions.forEach(opt=>{
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.style.margin = "5px";
+        btn.style.padding = "8px 12px";
+        btn.onclick = ()=> checkSentenceAnswer(opt);
+        sentenceDiv.appendChild(btn);
+    });
+
+    board.appendChild(sentenceDiv);
+}
+
+function checkSentenceAnswer(selected){
+    const board = document.getElementById("sentence-board");
+    const buttons = board.querySelectorAll("button");
+    const result = document.getElementById("sentence-result");
+    const correct = sentences[currentSentence].answer;
+
+    buttons.forEach(btn=>{
+        if(btn.innerText === correct) btn.classList.add("correct");
+        else if(btn.innerText === selected) btn.classList.add("wrong");
+        btn.disabled = true;
+    });
+
+    if(selected === correct){
+        result.innerText = "✅ Correct!";
+        result.style.color = "green";
+        sentenceScore++;
+    } else {
+        result.innerText = `❌ Wrong! Correct: ${correct}`;
+        result.style.color = "red";
+    }
+
+    currentSentence++;
+    setTimeout(() => loadSentence(), 1200);
+}
+
+
+// Start the game automatically when this section is shown
+window.showSection = function(id){
+    document.querySelectorAll("main section").forEach(sec => sec.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+
+    if(id === "sentence-game") startSentenceGame(); // Start game automatically
+}
+
+
+
 </script>
 </body>
 </html>
